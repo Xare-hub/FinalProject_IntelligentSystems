@@ -64,7 +64,6 @@ y_predictions = regressor.predict(X_test)
 print(np.expand_dims(y_predictions, axis=1))
 
 # Define hyperparameters
-exit = 0
 features = []
 
 Predict = input("\nDo you want to make a prediction of your own? (y/n)")

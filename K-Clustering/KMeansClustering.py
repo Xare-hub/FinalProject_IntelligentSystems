@@ -1,3 +1,6 @@
+# Code based on Python Engineer¿s video at: https://youtu.be/vtuH4VRq1AU?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -105,32 +108,33 @@ class KMeans:
 
         plt.show()
 
+# Tests
 
-import numpy as np
-from sklearn.datasets import make_blobs
-import matplotlib.pyplot as plt
-
-X, y = make_blobs(centers=5, n_samples=500, n_features=2, shuffle=True, random_state=42)
+# import numpy as np
+# from sklearn.datasets import make_blobs
+# import matplotlib.pyplot as plt
+#
+# X, y = make_blobs(centers=5, n_samples=500, n_features=2, shuffle=True, random_state=42)
+# # print(X.shape)
+# # X = X.tolist()
+#
+# print(type(X))
 # print(X.shape)
-# X = X.tolist()
-
-print(type(X))
-print(X.shape)
-print(X[0])
-
-X_only = [sample[0] for sample in X]
-Y_only = [sample[1] for sample in X]
-
-# print(X_only)
-# print(Y_only)
-
-#plt.scatter(X_only, Y_only)
-#plt.show()
-
-clusters = len(np.unique(y))   #Prints number of clusters
-print(clusters)
-
-
-k = KMeans(K=clusters, max_iters=150, plot_steps=True)    # 14 plots are made, close 13 plots
-y_pred = k.predict(X)
-#print(y_pred)
+# print(X[0])
+#
+# X_only = [sample[0] for sample in X]
+# Y_only = [sample[1] for sample in X]
+#
+# # print(X_only)
+# # print(Y_only)
+#
+# #plt.scatter(X_only, Y_only)
+# #plt.show()
+#
+# clusters = len(np.unique(y))   #Prints number of clusters
+# print(clusters)
+#
+#
+# k = KMeans(K=clusters, max_iters=150, plot_steps=True)    # 14 plots are made, close 13 plots
+# y_pred = k.predict(X)
+# #print(y_pred)

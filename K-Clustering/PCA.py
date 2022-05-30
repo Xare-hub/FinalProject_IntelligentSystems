@@ -1,4 +1,3 @@
-# PCA from scratch implementation, retrieved from: https://youtu.be/52d7ha-GdV8?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E
 import numpy as np
 
 class PCA:
@@ -21,7 +20,7 @@ class PCA:
         # v[:,1] <--- Each column is an eigenvector
         # sort eigenvectors
         eigenvectors = eigenvectors.T
-        idxs = np.argsort(eigenvalues)[::-1]    # Sort in descending order
+        idxs = np.argsort(eigenvalues)[::-1]
         eigenvalues = eigenvalues[idxs]
         eigenvectors = eigenvectors[idxs]
         # store first n eigenvectors

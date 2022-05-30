@@ -27,7 +27,7 @@ plt.scatter(x1, x2,
             c=y, edgecolor='none', alpha=0.8,
             cmap=plt.cm.get_cmap('viridis', 3))
 plt.colorbar()
-#plt.show()
+plt.show()
 
 x1 = np.expand_dims(x1, axis=1)
 x2 = np.expand_dims(x2,axis=1)
