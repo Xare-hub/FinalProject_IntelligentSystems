@@ -60,4 +60,29 @@ print("Weights:", regressor.weights, "\nbias:",regressor.bias, "\n")
 # Perform predictions
 y_predictions = regressor.predict(X_test)
 
+# Expand dimensions of y predictions to print as a column vector, purely aesthetical
 print(np.expand_dims(y_predictions, axis=1))
+
+# Define hyperparameters
+exit = 0
+features = []
+
+Predict = input("\nDo you want to make a prediction of your own? (y/n)")
+# Predict = 'Y'
+while Predict == 'y':
+    AT = input("\nEnter the Ambient Temperature")
+    V = input("\nEnter the Exhaust Vacuum")
+    AP = input("\nEnter the Ambient Pressure")
+    RH = input("\nEnter the Relative Humidity")
+
+    features = np.expand_dims(np.array([AT, V, AP, RH], dtype = 'float64'), axis=0)
+    # Normalize inputs
+    features = (features - mean)/std
+    print(features)
+    # Perform prediction
+    new_prediction = regressor.predict(features)
+    print("The expected power plant energy output is: ", new_prediction)
+
+    Predict = input("Make another prediction? (y/n)")
+
+print(features)
