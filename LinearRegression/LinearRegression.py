@@ -9,7 +9,7 @@ from sklearn import datasets
 
 class LinearRegression:
 
-    def __init__(self, lr=0.01, n_iters=1000):
+    def __init__(self, lr=0.1, n_iters=1000):
         self.lr = lr
         self.n_iters = n_iters
         self.weights = None
@@ -36,3 +36,7 @@ class LinearRegression:
     def predict(self, X):
         y_predicted = np.dot(X, self.weights) + self.bias
         return y_predicted  # Makes predictions for unseen samples
+
+# Define mean squared error function
+def mse(y_true, y_predicted):
+    return np.mean((y_true - y_predicted) ** 2)

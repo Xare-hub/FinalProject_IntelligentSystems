@@ -2,37 +2,62 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
+import pandas as pd
 
-X, y = datasets.make_regression(n_samples=100, n_features=3, noise=20, random_state=4)
+# X, y = datasets.make_regression(n_samples=9568, n_features=4, noise=1000, random_state=4)
+# print(type(X[0,0]))
+# print(type(y[0]))
+
+# Read the data
+data = pd.read_excel(r"C:\Users\javie\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Universidad\10mo Semestre\SI\FinalProject\Datasets\CCPP\Folds5x2_pp.xlsx")
+np_data = np.array(data)
+np_dataX = np_data[:, :-1]
+np_datay = np_data[:, -1]
+
+#Normalize data (Without normalization step, linear regression returns nan values due to vanishing/exploding gradients)
+# Subtract out the mean
+mean = np.mean(np_dataX, axis=0)
+np_dataX = np_dataX - mean
+# Normalize variance
+var = 1/len(np_dataX) * np.sum(np_dataX**2)
+std = np.sqrt(var)
+np_dataX = np_dataX/std
+# Add dimension to y vector to be able to append it no the normalized np_data array
+np_datay = np.expand_dims(np_datay, axis=1)
+# Append X and y
+np_data = np.append(np_dataX, np_datay, axis=1)
+print("\nnp_data shape: ", np_data.shape)
+# Separate features and labels
+X = np_data[:, :-1]
+y = np_data[:, -1]
+# Print sample instance
+print("\nX[0]: ", X[0], "     y[0]: ", y[0], "\n")
+
+#Separate dataset into training and tesing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
+# print(X_train.shape)
+# print(y_train.shape)
 
-#fig = plt.figure(figsize=(8,6))
-#plt.scatter(X[:, 0], y, color="b", marker='o', s = 30)
-#plt.show()
+# Import LinearRegression class
+from LinearRegression import LinearRegression, mse
 
-print(X_train.shape)
-print(y_train.shape)
-
-from LinearRegression import LinearRegression
-
+# Instantiate a LinearRegression object
 regressor = LinearRegression()
+
+# Fit the data to the linear regression model
 regressor.fit(X_train, y_train)
+
+# Predict values from the test set
 predicted = regressor.predict(X_test)
 
-def mse(y_true, y_predicted):
-    return np.mean((y_true - y_predicted) ** 2)
-
+# Compute mean squared error
 mse_value = mse(y_test, predicted)
-print(mse_value)
+print("Mean squared error: ", mse_value, "\n")
 
-print(regressor.weights, regressor.bias)
+# Print weights and bias vectors
+print("Weights:", regressor.weights, "\nbias:",regressor.bias, "\n")
 
-y_pred_line = regressor.predict(X)
-#cmap = plt.get_cmap("viridis")
-#fig = plt.figure(figsize=(8,6))
-#m1 = plt.scatter(X_train, y_train, color = cmap(0.9), s = 10)
-#m2 = plt.scatter(X_test, y_test, color = cmap(0.5), s = 10)
-#plt.plot(X, y_pred_line, color = 'black', linewidth=2, label="Prediction")
-#plt.show()
+# Perform predictions
+y_predictions = regressor.predict(X_test)
 
-print(y_pred_line)
+print(np.expand_dims(y_predictions, axis=1))

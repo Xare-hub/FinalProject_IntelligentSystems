@@ -131,6 +131,6 @@ clusters = len(np.unique(y))   #Prints number of clusters
 print(clusters)
 
 
-k = KMeans(K=clusters, max_iters=150, plot_steps=False)
+k = KMeans(K=clusters, max_iters=150, plot_steps=True)    # 14 plots are made, close 13 plots
 y_pred = k.predict(X)
 #print(y_pred)
